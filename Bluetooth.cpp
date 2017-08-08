@@ -6,6 +6,10 @@ using namespace chibios_rt;
 #define USART_CR3_ENABLE_RTS (1 << 8)
 #define USART_CR3_ENABLE_CTS (1 << 9)
 
+/**
+ * LOL
+ */
+
 //Configure Serial with SerialConfig Struct
 static SerialConfig sd2cfg = {
 	9600, // Baudrate
