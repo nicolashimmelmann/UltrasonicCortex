@@ -61,6 +61,8 @@ int main(void) {
 	initSensor();
 	sdStart(&SD5, &sd5cfg);
 
+	NVIC_EnableIRQ(EXTI4_15_IRQn);
+
 	while(1) {
 		uint16_t duration = readValue();
 		writeSensorDataUART(duration);
