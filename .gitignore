@@ -1,3 +1,5 @@
-./build
-./.dep
-./.settings
+/build/
+
+/.settings/
+
+/.dep/
