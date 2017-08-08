@@ -2,7 +2,9 @@
 #include <ch.hpp>
 #include <hal.h>
 #include <cstring>
+#include <stm32f030xc.h>
 using namespace chibios_rt;
+
 
 static SerialConfig sd5cfg = {
 		38400 // Baudrate
