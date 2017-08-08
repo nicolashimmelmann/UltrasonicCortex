@@ -1,4 +1,4 @@
-ARM GAS  /tmp/cc2SU6Nn.s 			page 1
+ARM GAS  /tmp/cc9XTuC1.s 			page 1
 
 
    1              		.cpu cortex-m0
@@ -58,7 +58,7 @@ ARM GAS  /tmp/cc2SU6Nn.s 			page 1
   55              		.thumb_set Vector9C,_unhandled_exception
   56              		.weak	Vector98
   57              		.thumb_set Vector98,_unhandled_exception
-ARM GAS  /tmp/cc2SU6Nn.s 			page 2
+ARM GAS  /tmp/cc9XTuC1.s 			page 2
 
 
   58              		.weak	Vector94
@@ -118,7 +118,7 @@ ARM GAS  /tmp/cc2SU6Nn.s 			page 1
  112              		.weak	Vector28
  113              		.thumb_set Vector28,_unhandled_exception
  114              		.weak	Vector24
-ARM GAS  /tmp/cc2SU6Nn.s 			page 3
+ARM GAS  /tmp/cc9XTuC1.s 			page 3
 
 
  115              		.thumb_set Vector24,_unhandled_exception
@@ -178,7 +178,7 @@ ARM GAS  /tmp/cc2SU6Nn.s 			page 1
  169 0084 00000000 		.word	Vector84
  170 0088 00000000 		.word	Vector88
  171 008c 00000000 		.word	Vector8C
-ARM GAS  /tmp/cc2SU6Nn.s 			page 4
+ARM GAS  /tmp/cc9XTuC1.s 			page 4
 
 
  172 0090 00000000 		.word	Vector90
@@ -209,14 +209,14 @@ ARM GAS  /tmp/cc2SU6Nn.s 			page 1
  197 000c 8D010000 		.4byte	.LASF34
  198 0010 0C       		.byte	0xc
  199 0011 15010000 		.4byte	.LASF35
- 200 0015 93020000 		.4byte	.LASF36
+ 200 0015 A5020000 		.4byte	.LASF36
  201 0019 00000000 		.4byte	.Ldebug_ranges0+0
  202 001d 00000000 		.4byte	0
  203 0021 00000000 		.4byte	.Ldebug_line0
  204 0025 02       		.uleb128 0x2
  205 0026 01       		.byte	0x1
  206 0027 06       		.byte	0x6
- 207 0028 CB020000 		.4byte	.LASF0
+ 207 0028 EC020000 		.4byte	.LASF0
  208 002c 02       		.uleb128 0x2
  209 002d 01       		.byte	0x1
  210 002e 08       		.byte	0x8
@@ -232,13 +232,13 @@ ARM GAS  /tmp/cc2SU6Nn.s 			page 1
  220 0041 02       		.uleb128 0x2
  221 0042 04       		.byte	0x4
  222 0043 05       		.byte	0x5
- 223 0044 B0020000 		.4byte	.LASF4
+ 223 0044 9C020000 		.4byte	.LASF4
  224 0048 03       		.uleb128 0x3
  225 0049 C8000000 		.4byte	.LASF9
  226 004d 02       		.byte	0x2
  227 004e 4F       		.byte	0x4f
  228 004f 53000000 		.4byte	0x53
-ARM GAS  /tmp/cc2SU6Nn.s 			page 5
+ARM GAS  /tmp/cc9XTuC1.s 			page 5
 
 
  229 0053 02       		.uleb128 0x2
@@ -262,7 +262,7 @@ ARM GAS  /tmp/cc2SU6Nn.s 			page 1
  247 0071 07       		.byte	0x7
  248 0072 DF000000 		.4byte	.LASF8
  249 0076 03       		.uleb128 0x3
- 250 0077 D7020000 		.4byte	.LASF10
+ 250 0077 93020000 		.4byte	.LASF10
  251 007b 03       		.byte	0x3
  252 007c 30       		.byte	0x30
  253 007d 48000000 		.4byte	0x48
@@ -298,7 +298,7 @@ ARM GAS  /tmp/cc2SU6Nn.s 			page 1
  283 00b9 09       		.uleb128 0x9
  284 00ba 55010000 		.4byte	.LASF14
  285 00be 04       		.byte	0x4
-ARM GAS  /tmp/cc2SU6Nn.s 			page 6
+ARM GAS  /tmp/cc9XTuC1.s 			page 6
 
 
  286 00bf 43       		.byte	0x43
@@ -317,7 +317,7 @@ ARM GAS  /tmp/cc2SU6Nn.s 			page 1
  299 00d8 93000000 		.4byte	0x93
  300 00dc 0C       		.byte	0xc
  301 00dd 09       		.uleb128 0x9
- 302 00de B9020000 		.4byte	.LASF17
+ 302 00de DA020000 		.4byte	.LASF17
  303 00e2 04       		.byte	0x4
  304 00e3 46       		.byte	0x46
  305 00e4 93000000 		.4byte	0x93
@@ -358,7 +358,7 @@ ARM GAS  /tmp/cc2SU6Nn.s 			page 1
  340 012b 4C       		.byte	0x4c
  341 012c 93000000 		.4byte	0x93
  342 0130 28       		.byte	0x28
-ARM GAS  /tmp/cc2SU6Nn.s 			page 7
+ARM GAS  /tmp/cc9XTuC1.s 			page 7
 
 
  343 0131 09       		.uleb128 0x9
@@ -409,7 +409,7 @@ ARM GAS  /tmp/cc2SU6Nn.s 			page 1
  388 018e 1F       		.byte	0x1f
  389 018f 00       		.byte	0
  390 0190 03       		.uleb128 0x3
- 391 0191 E0020000 		.4byte	.LASF30
+ 391 0191 F8020000 		.4byte	.LASF30
  392 0195 04       		.byte	0x4
  393 0196 53       		.byte	0x53
  394 0197 A5000000 		.4byte	0xa5
@@ -418,11 +418,11 @@ ARM GAS  /tmp/cc2SU6Nn.s 			page 1
  397 01a0 04       		.byte	0x4
  398 01a1 5F       		.byte	0x5f
  399 01a2 90010000 		.4byte	0x190
-ARM GAS  /tmp/cc2SU6Nn.s 			page 8
+ARM GAS  /tmp/cc9XTuC1.s 			page 8
 
 
  400 01a6 05       		.uleb128 0x5
- 401 01a7 EA020000 		.4byte	.LASF33
+ 401 01a7 02030000 		.4byte	.LASF33
  402 01ab 01       		.byte	0x1
  403 01ac 36       		.byte	0x36
  404 01ad 76000000 		.4byte	0x76
@@ -478,7 +478,7 @@ ARM GAS  /tmp/cc2SU6Nn.s 			page 1
  454 001f 16       		.uleb128 0x16
  455 0020 00       		.byte	0
  456 0021 03       		.uleb128 0x3
-ARM GAS  /tmp/cc2SU6Nn.s 			page 9
+ARM GAS  /tmp/cc9XTuC1.s 			page 9
 
 
  457 0022 0E       		.uleb128 0xe
@@ -538,7 +538,7 @@ ARM GAS  /tmp/cc2SU6Nn.s 			page 1
  511 0058 13       		.uleb128 0x13
  512 0059 01       		.byte	0x1
  513 005a 0B       		.uleb128 0xb
-ARM GAS  /tmp/cc2SU6Nn.s 			page 10
+ARM GAS  /tmp/cc9XTuC1.s 			page 10
 
 
  514 005b 0B       		.uleb128 0xb
@@ -598,7 +598,7 @@ ARM GAS  /tmp/cc2SU6Nn.s 			page 1
  568 0091 00       		.byte	0
  569 0092 0D       		.uleb128 0xd
  570 0093 2E       		.uleb128 0x2e
-ARM GAS  /tmp/cc2SU6Nn.s 			page 11
+ARM GAS  /tmp/cc9XTuC1.s 			page 11
 
 
  571 0094 00       		.byte	0
@@ -658,7 +658,7 @@ ARM GAS  /tmp/cc2SU6Nn.s 			page 1
  617      6F723334 
  617      00
  618              	.LASF27:
-ARM GAS  /tmp/cc2SU6Nn.s 			page 12
+ARM GAS  /tmp/cc9XTuC1.s 			page 12
 
 
  619 0016 70656E64 		.ascii	"pendsv_handler\000"
@@ -718,7 +718,7 @@ ARM GAS  /tmp/cc2SU6Nn.s 			page 1
  641 00b6 68617264 		.ascii	"hardfault_handler\000"
  641      6661756C 
  641      745F6861 
-ARM GAS  /tmp/cc2SU6Nn.s 			page 13
+ARM GAS  /tmp/cc9XTuC1.s 			page 13
 
 
  641      6E646C65 
@@ -778,7 +778,7 @@ ARM GAS  /tmp/cc2SU6Nn.s 			page 1
  664      657200
  665              	.LASF6:
  666 017f 6C6F6E67 		.ascii	"long long int\000"
-ARM GAS  /tmp/cc2SU6Nn.s 			page 14
+ARM GAS  /tmp/cc9XTuC1.s 			page 14
 
 
  666      206C6F6E 
@@ -825,104 +825,105 @@ ARM GAS  /tmp/cc2SU6Nn.s 			page 1
  680 0289 73686F72 		.ascii	"short int\000"
  680      7420696E 
  680      7400
- 681              	.LASF36:
- 682 0293 2F686F6D 		.ascii	"/home/felix/esho/Ultrasound/\000"
- 682      652F6665 
- 682      6C69782F 
- 682      6573686F 
- 682      2F556C74 
+ 681              	.LASF10:
+ 682 0293 75696E74 		.ascii	"uint32_t\000"
+ 682      33325F74 
+ 682      00
  683              	.LASF4:
- 684 02b0 6C6F6E67 		.ascii	"long int\000"
+ 684 029c 6C6F6E67 		.ascii	"long int\000"
  684      20696E74 
  684      00
- 685              	.LASF17:
- 686 02b9 6D656D6D 		.ascii	"memmanage_handler\000"
- 686      616E6167 
-ARM GAS  /tmp/cc2SU6Nn.s 			page 15
+ 685              	.LASF36:
+ 686 02a5 2F686F6D 		.ascii	"/home/felix/Desktop/workspace/esho/UltrasonicCortex"
+ 686      652F6665 
+ 686      6C69782F 
+ 686      4465736B 
+ARM GAS  /tmp/cc9XTuC1.s 			page 15
 
 
- 686      655F6861 
- 686      6E646C65 
- 686      7200
- 687              	.LASF0:
- 688 02cb 7369676E 		.ascii	"signed char\000"
- 688      65642063 
- 688      68617200 
- 689              	.LASF10:
- 690 02d7 75696E74 		.ascii	"uint32_t\000"
- 690      33325F74 
- 690      00
- 691              	.LASF30:
- 692 02e0 76656374 		.ascii	"vectors_t\000"
- 692      6F72735F 
- 692      7400
- 693              	.LASF33:
- 694 02ea 5F5F6D61 		.ascii	"__main_stack_end__\000"
- 694      696E5F73 
- 694      7461636B 
- 694      5F656E64 
- 694      5F5F00
- 695              		.ident	"GCC: (GNU Tools for ARM Embedded Processors 6-2017-q1-update) 6.3.1 20170215 (release) [AR
-ARM GAS  /tmp/cc2SU6Nn.s 			page 16
+ 686      746F702F 
+ 687 02d8 2F00     		.ascii	"/\000"
+ 688              	.LASF17:
+ 689 02da 6D656D6D 		.ascii	"memmanage_handler\000"
+ 689      616E6167 
+ 689      655F6861 
+ 689      6E646C65 
+ 689      7200
+ 690              	.LASF0:
+ 691 02ec 7369676E 		.ascii	"signed char\000"
+ 691      65642063 
+ 691      68617200 
+ 692              	.LASF30:
+ 693 02f8 76656374 		.ascii	"vectors_t\000"
+ 693      6F72735F 
+ 693      7400
+ 694              	.LASF33:
+ 695 0302 5F5F6D61 		.ascii	"__main_stack_end__\000"
+ 695      696E5F73 
+ 695      7461636B 
+ 695      5F656E64 
+ 695      5F5F00
+ 696              		.ident	"GCC: (GNU Tools for ARM Embedded Processors 6-2017-q1-update) 6.3.1 20170215 (release) [AR
+ARM GAS  /tmp/cc9XTuC1.s 			page 16
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 vectors.c
-     /tmp/cc2SU6Nn.s:16     .text._unhandled_exception:0000000000000000 $t
-     /tmp/cc2SU6Nn.s:24     .text._unhandled_exception:0000000000000000 _unhandled_exception
-     /tmp/cc2SU6Nn.s:24     .text._unhandled_exception:0000000000000000 VectorBC
-     /tmp/cc2SU6Nn.s:24     .text._unhandled_exception:0000000000000000 VectorB8
-     /tmp/cc2SU6Nn.s:24     .text._unhandled_exception:0000000000000000 VectorB4
-     /tmp/cc2SU6Nn.s:24     .text._unhandled_exception:0000000000000000 VectorB0
-     /tmp/cc2SU6Nn.s:24     .text._unhandled_exception:0000000000000000 VectorAC
-     /tmp/cc2SU6Nn.s:24     .text._unhandled_exception:0000000000000000 VectorA8
-     /tmp/cc2SU6Nn.s:24     .text._unhandled_exception:0000000000000000 VectorA4
-     /tmp/cc2SU6Nn.s:24     .text._unhandled_exception:0000000000000000 VectorA0
-     /tmp/cc2SU6Nn.s:24     .text._unhandled_exception:0000000000000000 Vector9C
-     /tmp/cc2SU6Nn.s:24     .text._unhandled_exception:0000000000000000 Vector98
-     /tmp/cc2SU6Nn.s:24     .text._unhandled_exception:0000000000000000 Vector94
-     /tmp/cc2SU6Nn.s:24     .text._unhandled_exception:0000000000000000 Vector90
-     /tmp/cc2SU6Nn.s:24     .text._unhandled_exception:0000000000000000 Vector8C
-     /tmp/cc2SU6Nn.s:24     .text._unhandled_exception:0000000000000000 Vector88
-     /tmp/cc2SU6Nn.s:24     .text._unhandled_exception:0000000000000000 Vector84
-     /tmp/cc2SU6Nn.s:24     .text._unhandled_exception:0000000000000000 Vector80
-     /tmp/cc2SU6Nn.s:24     .text._unhandled_exception:0000000000000000 Vector7C
-     /tmp/cc2SU6Nn.s:24     .text._unhandled_exception:0000000000000000 Vector78
-     /tmp/cc2SU6Nn.s:24     .text._unhandled_exception:0000000000000000 Vector74
-     /tmp/cc2SU6Nn.s:24     .text._unhandled_exception:0000000000000000 Vector70
-     /tmp/cc2SU6Nn.s:24     .text._unhandled_exception:0000000000000000 Vector6C
-     /tmp/cc2SU6Nn.s:24     .text._unhandled_exception:0000000000000000 Vector68
-     /tmp/cc2SU6Nn.s:24     .text._unhandled_exception:0000000000000000 Vector64
-     /tmp/cc2SU6Nn.s:24     .text._unhandled_exception:0000000000000000 Vector60
-     /tmp/cc2SU6Nn.s:24     .text._unhandled_exception:0000000000000000 Vector5C
-     /tmp/cc2SU6Nn.s:24     .text._unhandled_exception:0000000000000000 Vector58
-     /tmp/cc2SU6Nn.s:24     .text._unhandled_exception:0000000000000000 Vector54
-     /tmp/cc2SU6Nn.s:24     .text._unhandled_exception:0000000000000000 Vector50
-     /tmp/cc2SU6Nn.s:24     .text._unhandled_exception:0000000000000000 Vector4C
-     /tmp/cc2SU6Nn.s:24     .text._unhandled_exception:0000000000000000 Vector48
-     /tmp/cc2SU6Nn.s:24     .text._unhandled_exception:0000000000000000 Vector44
-     /tmp/cc2SU6Nn.s:24     .text._unhandled_exception:0000000000000000 Vector40
-     /tmp/cc2SU6Nn.s:24     .text._unhandled_exception:0000000000000000 SysTick_Handler
-     /tmp/cc2SU6Nn.s:24     .text._unhandled_exception:0000000000000000 PendSV_Handler
-     /tmp/cc2SU6Nn.s:24     .text._unhandled_exception:0000000000000000 Vector34
-     /tmp/cc2SU6Nn.s:24     .text._unhandled_exception:0000000000000000 DebugMon_Handler
-     /tmp/cc2SU6Nn.s:24     .text._unhandled_exception:0000000000000000 SVC_Handler
-     /tmp/cc2SU6Nn.s:24     .text._unhandled_exception:0000000000000000 Vector28
-     /tmp/cc2SU6Nn.s:24     .text._unhandled_exception:0000000000000000 Vector24
-     /tmp/cc2SU6Nn.s:24     .text._unhandled_exception:0000000000000000 Vector20
-     /tmp/cc2SU6Nn.s:24     .text._unhandled_exception:0000000000000000 Vector1C
-     /tmp/cc2SU6Nn.s:24     .text._unhandled_exception:0000000000000000 UsageFault_Handler
-     /tmp/cc2SU6Nn.s:24     .text._unhandled_exception:0000000000000000 BusFault_Handler
-     /tmp/cc2SU6Nn.s:24     .text._unhandled_exception:0000000000000000 MemManage_Handler
-     /tmp/cc2SU6Nn.s:24     .text._unhandled_exception:0000000000000000 HardFault_Handler
-     /tmp/cc2SU6Nn.s:24     .text._unhandled_exception:0000000000000000 NMI_Handler
-     /tmp/cc2SU6Nn.s:135    .vectors:0000000000000000 _vectors
-     /tmp/cc2SU6Nn.s:132    .vectors:0000000000000000 $d
+     /tmp/cc9XTuC1.s:16     .text._unhandled_exception:0000000000000000 $t
+     /tmp/cc9XTuC1.s:24     .text._unhandled_exception:0000000000000000 _unhandled_exception
+     /tmp/cc9XTuC1.s:24     .text._unhandled_exception:0000000000000000 VectorBC
+     /tmp/cc9XTuC1.s:24     .text._unhandled_exception:0000000000000000 VectorB8
+     /tmp/cc9XTuC1.s:24     .text._unhandled_exception:0000000000000000 VectorB4
+     /tmp/cc9XTuC1.s:24     .text._unhandled_exception:0000000000000000 VectorB0
+     /tmp/cc9XTuC1.s:24     .text._unhandled_exception:0000000000000000 VectorAC
+     /tmp/cc9XTuC1.s:24     .text._unhandled_exception:0000000000000000 VectorA8
+     /tmp/cc9XTuC1.s:24     .text._unhandled_exception:0000000000000000 VectorA4
+     /tmp/cc9XTuC1.s:24     .text._unhandled_exception:0000000000000000 VectorA0
+     /tmp/cc9XTuC1.s:24     .text._unhandled_exception:0000000000000000 Vector9C
+     /tmp/cc9XTuC1.s:24     .text._unhandled_exception:0000000000000000 Vector98
+     /tmp/cc9XTuC1.s:24     .text._unhandled_exception:0000000000000000 Vector94
+     /tmp/cc9XTuC1.s:24     .text._unhandled_exception:0000000000000000 Vector90
+     /tmp/cc9XTuC1.s:24     .text._unhandled_exception:0000000000000000 Vector8C
+     /tmp/cc9XTuC1.s:24     .text._unhandled_exception:0000000000000000 Vector88
+     /tmp/cc9XTuC1.s:24     .text._unhandled_exception:0000000000000000 Vector84
+     /tmp/cc9XTuC1.s:24     .text._unhandled_exception:0000000000000000 Vector80
+     /tmp/cc9XTuC1.s:24     .text._unhandled_exception:0000000000000000 Vector7C
+     /tmp/cc9XTuC1.s:24     .text._unhandled_exception:0000000000000000 Vector78
+     /tmp/cc9XTuC1.s:24     .text._unhandled_exception:0000000000000000 Vector74
+     /tmp/cc9XTuC1.s:24     .text._unhandled_exception:0000000000000000 Vector70
+     /tmp/cc9XTuC1.s:24     .text._unhandled_exception:0000000000000000 Vector6C
+     /tmp/cc9XTuC1.s:24     .text._unhandled_exception:0000000000000000 Vector68
+     /tmp/cc9XTuC1.s:24     .text._unhandled_exception:0000000000000000 Vector64
+     /tmp/cc9XTuC1.s:24     .text._unhandled_exception:0000000000000000 Vector60
+     /tmp/cc9XTuC1.s:24     .text._unhandled_exception:0000000000000000 Vector5C
+     /tmp/cc9XTuC1.s:24     .text._unhandled_exception:0000000000000000 Vector58
+     /tmp/cc9XTuC1.s:24     .text._unhandled_exception:0000000000000000 Vector54
+     /tmp/cc9XTuC1.s:24     .text._unhandled_exception:0000000000000000 Vector50
+     /tmp/cc9XTuC1.s:24     .text._unhandled_exception:0000000000000000 Vector4C
+     /tmp/cc9XTuC1.s:24     .text._unhandled_exception:0000000000000000 Vector48
+     /tmp/cc9XTuC1.s:24     .text._unhandled_exception:0000000000000000 Vector44
+     /tmp/cc9XTuC1.s:24     .text._unhandled_exception:0000000000000000 Vector40
+     /tmp/cc9XTuC1.s:24     .text._unhandled_exception:0000000000000000 SysTick_Handler
+     /tmp/cc9XTuC1.s:24     .text._unhandled_exception:0000000000000000 PendSV_Handler
+     /tmp/cc9XTuC1.s:24     .text._unhandled_exception:0000000000000000 Vector34
+     /tmp/cc9XTuC1.s:24     .text._unhandled_exception:0000000000000000 DebugMon_Handler
+     /tmp/cc9XTuC1.s:24     .text._unhandled_exception:0000000000000000 SVC_Handler
+     /tmp/cc9XTuC1.s:24     .text._unhandled_exception:0000000000000000 Vector28
+     /tmp/cc9XTuC1.s:24     .text._unhandled_exception:0000000000000000 Vector24
+     /tmp/cc9XTuC1.s:24     .text._unhandled_exception:0000000000000000 Vector20
+     /tmp/cc9XTuC1.s:24     .text._unhandled_exception:0000000000000000 Vector1C
+     /tmp/cc9XTuC1.s:24     .text._unhandled_exception:0000000000000000 UsageFault_Handler
+     /tmp/cc9XTuC1.s:24     .text._unhandled_exception:0000000000000000 BusFault_Handler
+     /tmp/cc9XTuC1.s:24     .text._unhandled_exception:0000000000000000 MemManage_Handler
+     /tmp/cc9XTuC1.s:24     .text._unhandled_exception:0000000000000000 HardFault_Handler
+     /tmp/cc9XTuC1.s:24     .text._unhandled_exception:0000000000000000 NMI_Handler
+     /tmp/cc9XTuC1.s:135    .vectors:0000000000000000 _vectors
+     /tmp/cc9XTuC1.s:132    .vectors:0000000000000000 $d
                      .debug_frame:0000000000000010 $d
 
 UNDEFINED SYMBOLS
 __main_stack_end__
 Reset_Handler
-ARM GAS  /tmp/cc2SU6Nn.s 			page 17
+ARM GAS  /tmp/cc9XTuC1.s 			page 17
 
 

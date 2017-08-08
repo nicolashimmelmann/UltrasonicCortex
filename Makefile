@@ -2,7 +2,7 @@
 # ---------------------------------
 
 # define project name here
-PROJECT = Ultrasound
+PROJECT = UltrasonicCortex
 
 # sources to compile -- add your own
 APPSRC = main.cpp
