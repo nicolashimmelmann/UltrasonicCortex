@@ -98,7 +98,7 @@ CSRC = $(STARTUPSRC) \
 CPPSRC = $(CHCPPSRC) \
          main.cpp \
          Stepper.cpp \
-         Sensor.cpp \
+         UltrasonicSensor.cpp \
          Bluetooth.cpp
 
 # C sources to be compiled in ARM mode regardless of the global setting.

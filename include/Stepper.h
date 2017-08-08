@@ -4,14 +4,18 @@
 class Stepper {
 
 public:
-	Stepper();
+	Stepper(short max_steps, short steps);
+
+	void tick();
 
 	void makeStep();
-
 	void makeNSteps(short n);
+	void makeStepForward();
+	void makeStepBackward();
 
 private:
-	const int MAX_STEPS = 128;
+	short MAX_STEPS = 10;
+	short stepsPerTick = 1;
 
 	void step(short n);
 	void setPins(bool, bool, bool, bool);

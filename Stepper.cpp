@@ -5,8 +5,11 @@
 
 /**
  * Initializes the pins GPIO 4, 5, 6 and 7 to control a stepper motor.
+ *
+ * @param max_steps The number of steps after which to turn into the opposite direction.
+ * @param steps_per_tick The number of steps to take for one tick command.
  */
-Stepper::Stepper() {
+Stepper::Stepper(short max_steps, short steps_per_tick) {
 	//GIPOs 4, 5, 6, 7
 	//GPIO4 = PC13
 	//GPIO5 = PB7
@@ -20,6 +23,9 @@ Stepper::Stepper() {
 	//Initialize direction
 	currentStep = 0;
 	forward = true;
+
+	MAX_STEPS = max_steps;
+	stepsPerTick = steps_per_tick;
 }
 
 /**
@@ -32,16 +38,12 @@ void Stepper::setPins(bool a, bool b, bool c, bool d) {
 	if(d) palSetPad(GPIOC, 14); else palClearPad(GPIOC, 14);
 }
 
-
-void Stepper::makeNSteps(short n) {
-	while(n--)
-	{
-		makeStep();
-	}
+void Stepper::tick() {
+	makeNSteps(stepsPerTick);
 }
 
 /**
- * Make the next step-
+ * Make the next step.
  */
 void Stepper::makeStep() {
 	if(forward)
@@ -49,22 +51,12 @@ void Stepper::makeStep() {
 		//Go forward by increasing n from 0 to 3
 		//and making a step each time
 		++currentStep;
-		short n = 0;
-		while(n < 4)
-		{
-			step(n);
-			++n;
-		}
+		makeStepForward();
 	} else {
 		//Go backward by decreasing n from 3 to 0
 		//and making a step each time
 		--currentStep;
-		short n = 3;
-		while(n > 0)
-		{
-			step(n);
-			--n;
-		}
+		makeStepBackward();
 	}
 
 	//Change direction if necessary
@@ -80,26 +72,51 @@ void Stepper::makeStep() {
 	}
 }
 
+void Stepper::makeNSteps(short n) {
+	while(n--)
+	{
+		makeStep();
+	}
+}
+
+void Stepper::makeStepForward() {
+	short n = 0;
+	while(n < 4)
+	{
+		step(n);
+		++n;
+	}
+}
+
+void Stepper::makeStepBackward() {
+	short n = 4;
+	while(n > 0)
+	{
+		step(n-1);
+		--n;
+	}
+}
+
 /**
  * Change the phases of the motor using setPins() above.
  */
 void Stepper::step(short n) {
 	switch (n)
 	{
-		case 0:  // 1010
-			setPins(true, false, true, false);
+		case 0:  // 0011
+			setPins(false, false, true, true);
 			break;
-		case 1:  // 0110
-			setPins(false, true, true, false);
-			break;
-		case 2:  //0101
-			setPins(false, true, false, true);
-			break;
-		case 3:  //1001
+		case 1:  // 1001
 			setPins(true, false, false, true);
 			break;
+		case 2:  //1100
+			setPins(true, true, false, false);
+			break;
+		case 3:  //0110
+			setPins(false, true, true, false);
+			break;
 	}
-	chThdSleep(50);
+	chThdSleep(60);
 }
 
 

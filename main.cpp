@@ -75,27 +75,27 @@ uint16_t readValue() {
 
 
 static void sensor1(EXTDriver *extp, expchannel_t channel) {
-  (void)extp;
-  (void)channel;
-  chSysLockFromISR();
-  if(!is_high_sensor1)
-	 start1 = chVTGetSystemTimeX();
-  else
-	  end1 = chVTGetSystemTimeX();
-  is_high_sensor1 = !is_high_sensor1;
-  chSysUnlockFromISR();
+	(void)extp;
+	(void)channel;
+	chSysLockFromISR();
+	if(!is_high_sensor1)
+		start1 = chVTGetSystemTimeX();
+	else
+		end1 = chVTGetSystemTimeX();
+	is_high_sensor1 = !is_high_sensor1;
+	chSysUnlockFromISR();
 }
 
 static void sensor2(EXTDriver *extp, expchannel_t channel) {
-	  (void)extp;
-	  (void)channel;
-	  chSysLockFromISR();
-	  if(!is_high_sensor2)
-		 start2 = chVTGetSystemTimeX();
-	  else
-		  end2 = chVTGetSystemTimeX();
-	  is_high_sensor2 = !is_high_sensor2;
-	  chSysUnlockFromISR();
+	(void)extp;
+	(void)channel;
+	chSysLockFromISR();
+	if(!is_high_sensor2)
+		start2 = chVTGetSystemTimeX();
+	else
+		end2 = chVTGetSystemTimeX();
+	is_high_sensor2 = !is_high_sensor2;
+	chSysUnlockFromISR();
 }
 
 static const EXTConfig extcfg = {
@@ -133,7 +133,7 @@ int main(void) {
 
 	initUART();
 	initSensor();
-	Stepper stepper;
+	Stepper stepper(256, 5);
 
 	sdStart(&SD5, &sd5cfg);
 
@@ -144,10 +144,12 @@ int main(void) {
 	start2 = 0;
 	end2 = 0;
 
+	//Enable interrupt channels for the two sensors
 	extStart(&EXTD1, &extcfg);
 	extChannelEnable(&EXTD1, 5);
 	extChannelEnable(&EXTD1, 14);
 
+	//Start measurements for each sensor
 	palSetPad(GPIOB, 15);
 	palSetPad(GPIOB, 6);
 	chThdSleepMicroseconds(100);
@@ -155,12 +157,13 @@ int main(void) {
 	palClearPad(GPIOB, 6);
 
 	while(1) {
+		//Take 5 measurements
 		int n = 5;
 		while(n--)
 		{
 			uint16_t duration = readValue();
 			writeSensorDataUART(duration);
-			int sleep = (200000-duration) / 1000;
+			int sleep = (500000-duration) / 1000;
 			if(sleep > 0)
 			{
 				chThdSleep(sleep);
@@ -176,8 +179,8 @@ int main(void) {
 			test2 = !test2;
 		}
 
-		stepper.makeNSteps(3);
-		chThdSleep(10);
+		//Turn the motor
+		stepper.tick();
 
 	}
 	return 0;
