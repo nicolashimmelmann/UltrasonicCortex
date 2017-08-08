@@ -1,13 +1,18 @@
 #include <stdio.h>
 #include <ch.hpp>
 #include <hal.h>
+#include <pal.h>
 #include <cstring>
 #include <stm32f030xc.h>
+
+#include "include/Stepper.h"
+#include "include/Bluetooth.h"
+
 using namespace chibios_rt;
 
 
 static SerialConfig sd5cfg = {
-		38400 // Baudrate
+	38400 // Baudrate
 };
 
 void initUART() {
@@ -63,12 +68,22 @@ int main(void) {
 	initSensor();
 	sdStart(&SD5, &sd5cfg);
 
-	NVIC_EnableIRQ(EXTI4_15_IRQn);
+	Stepper stepper;
 
 	while(1) {
-		uint16_t duration = readValue();
-		writeSensorDataUART(duration);
-		chThdSleep(100);
+		int n = 5;
+		while(n--)
+		{
+			uint16_t duration = readValue();
+			writeSensorDataUART(duration);
+			int sleep = (200000-duration) / 1000;
+			if(sleep > 0)
+			{
+				chThdSleep(sleep);
+			}
+		}
+		stepper.makeNSteps(3);
+		chThdSleep(10);
 	}
 	return 0;
 }

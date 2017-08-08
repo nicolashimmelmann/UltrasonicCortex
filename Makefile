@@ -4,9 +4,6 @@
 # define project name here
 PROJECT = UltrasonicCortex
 
-# sources to compile -- add your own
-APPSRC = main.cpp
-
 # ChibiOS source paths
 CHIBIOS = ChibiOS
 
@@ -99,7 +96,8 @@ CSRC = $(STARTUPSRC) \
        $(CHIBIOS)/os/hal/lib/streams/chprintf.c 
 
 CPPSRC = $(CHCPPSRC) \
-         main.cpp
+         main.cpp \
+         Stepper.cpp
 
 # C sources to be compiled in ARM mode regardless of the global setting.
 # NOTE: Mixing ARM and THUMB mode enables the -mthumb-interwork compiler
