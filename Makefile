@@ -97,7 +97,9 @@ CSRC = $(STARTUPSRC) \
 
 CPPSRC = $(CHCPPSRC) \
          main.cpp \
-         Stepper.cpp
+         Stepper.cpp \
+         Sensor.cpp \
+         Bluetooth.cpp
 
 # C sources to be compiled in ARM mode regardless of the global setting.
 # NOTE: Mixing ARM and THUMB mode enables the -mthumb-interwork compiler

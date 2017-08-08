@@ -20,7 +20,7 @@ static SerialConfig sd2cfg = {
 // MCU_USART2_RTS = PA1
 // MCU_USART2_TX = PA2
 // MCU_USART2_RX = PA3
-int main(void) {
+/*int main(void) {
 	halInit();
 	chSysInit();
 
@@ -47,5 +47,5 @@ int main(void) {
 	}
 
 	return 0;
-}
+}*/
 
