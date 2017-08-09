@@ -29,9 +29,10 @@ Bluetooth::Bluetooth() {
 	sdStart(&SD2, &sd2cfg);
 }
 
-void Bluetooth::send(uint32_t data) {
+void Bluetooth::send(uint16_t data1, uint16_t data2) {
 	//Buffer for the characters
-	sdWrite(&SD2, (uint8_t *) &data, 4);
+	uint16_t dataArray[] = {data1, data2};
+	sdWrite(&SD2, (uint8_t *) &dataArray, 4);
 }
 
 /**

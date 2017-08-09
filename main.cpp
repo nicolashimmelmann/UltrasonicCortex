@@ -71,23 +71,22 @@ int main(void) {
 		uint16_t duration1 = sensor1.getValue();
 		uint16_t duration2 = sensor2.getValue();
 
-		if(duration1 > 0)
+		/*if(duration1 > 0)
 			writeSensorDataUART(duration1, '1');
 		if(duration2 > 0)
 			writeSensorDataUART(duration2, '2');
-		chThdSleep(3000);
+		chThdSleep(3000);*/
 
 		if(IS_ACTIVE)
 		{
-			uint32_t data = readValue();
 			//writeSensorDataUART(data);
-			bt.send(data);
+			bt.send(duration1, duration2);
 
 			//Turn the motor
 			stepper.tick();
 			++n;
 
-			//Read stop command from bluetooth with timeout to not block too long
+			//Read stop command from Bluetooth with timeout to not block too long
 			char cmd = bt.readCommand(true);
 			if(cmd == CMD_START) {
 				IS_ACTIVE = false;

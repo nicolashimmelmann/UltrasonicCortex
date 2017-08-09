@@ -8,7 +8,7 @@ class Bluetooth {
 public:
 	Bluetooth();
 
-	void send(uint32_t data);
+	void send(uint16_t data1, uint16_t data2);
 	char readCommand(bool timeout);
 
 private:
