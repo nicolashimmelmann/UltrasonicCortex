@@ -12,40 +12,19 @@
 class UltrasonicSensor {
 public:
 	UltrasonicSensor(short triggerPin, short echoPin);
+	void startMeasurement();
 	uint16_t getValue();
 private:
-	void interruptHandler(EXTDriver *extp, expchannel_t channel);
-	static bool extStarted = false;
-	bool isHighFlank = false;
-	bool finishedMeasurment = false;
-	systime_t startTime = 0;
-	systime_t endTime = 0;
+	static void interruptHandler(EXTDriver *extp, expchannel_t channel);
+	static bool isHighFlank[20];
+	static systime_t startTime[20];
+	static systime_t endTime[20];
+	short echoPin;
+	short triggerPin;
+	static bool extStarted;
 
-	static const EXTChannelConfig echoChannelConfig = {EXT_CH_MODE_BOTH_EDGES | EXT_CH_MODE_AUTOSTART | EXT_MODE_GPIOB, interruptHandler};
-	static const EXTConfig extcfg = {
-	  {
-	    {EXT_CH_MODE_DISABLED, NULL},
-	    {EXT_CH_MODE_DISABLED, NULL},
-	    {EXT_CH_MODE_DISABLED, NULL},
-	    {EXT_CH_MODE_DISABLED, NULL},
-	    {EXT_CH_MODE_DISABLED, NULL},
-	    {EXT_CH_MODE_DISABLED, NULL},
-	    {EXT_CH_MODE_DISABLED, NULL},
-	    {EXT_CH_MODE_DISABLED, NULL},
-	    {EXT_CH_MODE_DISABLED, NULL},
-	    {EXT_CH_MODE_DISABLED, NULL},
-	    {EXT_CH_MODE_DISABLED, NULL},
-	    {EXT_CH_MODE_DISABLED, NULL},
-	    {EXT_CH_MODE_DISABLED, NULL},
-	    {EXT_CH_MODE_DISABLED, NULL},
-	    {EXT_CH_MODE_DISABLED, NULL},
-	    {EXT_CH_MODE_DISABLED, NULL},
-	    {EXT_CH_MODE_DISABLED, NULL},
-	    {EXT_CH_MODE_DISABLED, NULL},
-	    {EXT_CH_MODE_DISABLED, NULL},
-	    {EXT_CH_MODE_DISABLED, NULL}
-	  }
-	};
+	static const EXTChannelConfig echoChannelConfig;
+	static EXTConfig extcfg;
 
 };
 
