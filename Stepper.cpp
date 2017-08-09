@@ -9,7 +9,7 @@
  * @param max_steps The number of steps after which to turn into the opposite direction.
  * @param steps_per_tick The number of steps to take for one tick command.
  */
-Stepper::Stepper(short max_steps, short steps_per_tick) {
+Stepper::Stepper(short max_ticks) {
 	//GIPOs 4, 5, 6, 7
 	//GPIO4 = PC13
 	//GPIO5 = PB7
@@ -24,8 +24,10 @@ Stepper::Stepper(short max_steps, short steps_per_tick) {
 	currentStep = 0;
 	forward = true;
 
-	MAX_STEPS = max_steps;
-	stepsPerTick = steps_per_tick;
+	//Number of steps after which to turn around
+	MAX_STEPS = STEPS_PER_REVOLUTION / 2;
+	//Calculate the steps necessary for a tick.
+	stepsPerTick = MAX_STEPS / max_ticks;
 }
 
 /**

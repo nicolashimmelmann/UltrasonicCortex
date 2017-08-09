@@ -7,6 +7,7 @@
 
 #include "include/Stepper.h"
 #include "include/Bluetooth.h"
+#include "include/UltrasonicSensor.h"
 
 using namespace chibios_rt;
 
@@ -17,6 +18,8 @@ systime_t end1;
 systime_t start2;
 systime_t end2;
 
+static bool IS_ACTIVE = false;
+char CMD_START = 'S';
 
 
 static SerialConfig sd5cfg = {
@@ -51,7 +54,7 @@ void initSensor() {
 	palSetPadMode(GPIOB, 5, PAL_MODE_INPUT);
 }
 
-uint16_t readValue() {
+uint32_t readValue() {
 	systime_t start;
 	systime_t duration;
 
@@ -126,6 +129,15 @@ static const EXTConfig extcfg = {
   }
 };
 
+void waitForStartCommand(Bluetooth * bt) {
+	//Do nothing until start is received
+	char cmd = '0';
+	while(cmd != CMD_START) {
+		cmd = (*bt).readCommand(false);
+	}
+	IS_ACTIVE = true;
+}
+
 
 int main(void) {
 	halInit();
@@ -133,16 +145,12 @@ int main(void) {
 
 	initUART();
 	initSensor();
-	Stepper stepper(256, 5);
+	Stepper stepper(64);
+	Bluetooth bt;
 
 	sdStart(&SD5, &sd5cfg);
 
-	bool test = false;
-	bool test2 = false;
-	start1 = 0;
-	end1 = 0;
-	start2 = 0;
-	end2 = 0;
+	waitForStartCommand(&bt);
 
 	//Enable interrupt channels for the two sensors
 	extStart(&EXTD1, &extcfg);
@@ -156,32 +164,28 @@ int main(void) {
 	palClearPad(GPIOB, 15);
 	palClearPad(GPIOB, 6);
 
+	int n = 0;
 	while(1) {
-		//Take 5 measurements
-		int n = 5;
-		while(n--)
+		if(IS_ACTIVE)
 		{
-			uint16_t duration = readValue();
-			writeSensorDataUART(duration);
-			int sleep = (500000-duration) / 1000;
-			if(sleep > 0)
-			{
-				chThdSleep(sleep);
+			uint32_t data = readValue();
+			//writeSensorDataUART(data);
+			bt.send(data);
+
+			//Turn the motor
+			stepper.tick();
+			++n;
+
+			//Read stop command from bluetooth with timeout to not block too long
+			char cmd = bt.readCommand(true);
+			if(cmd == CMD_START) {
+				IS_ACTIVE = false;
 			}
 		}
-
-		if(start1 != 0 and end1 != 0 and !test) {
-			writeSensorDataUART(ST2US(end1 - start1));
-			test = !test;
+		else
+		{
+			waitForStartCommand(&bt);
 		}
-		if(start2 != 0 and end2 != 0 and !test2) {
-			writeSensorDataUART(ST2US(end2 - start2));
-			test2 = !test2;
-		}
-
-		//Turn the motor
-		stepper.tick();
-
 	}
 	return 0;
 }

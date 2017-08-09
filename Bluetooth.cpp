@@ -1,17 +1,13 @@
+#include "include/Bluetooth.h"
 #include <ch.hpp>
 #include <hal.h>
-#include <cstring>
 using namespace chibios_rt;
 
-#define USART_CR3_ENABLE_RTS (1 << 8)
-#define USART_CR3_ENABLE_CTS (1 << 9)
-
-//Configure Serial with SerialConfig Struct
 static SerialConfig sd2cfg = {
 	9600, // Baudrate
 	0,
 	0,
-	0//USART_CR3_ENABLE_RTS | USART_CR3_ENABLE_CTS
+	0 //USART_CR3_ENABLE_RTS | USART_CR3_ENABLE_CTS
 };
 
 // https://github.com/fcayci/STM32F4-ChibiOS/blob/master/serial/main.c
@@ -20,10 +16,8 @@ static SerialConfig sd2cfg = {
 // MCU_USART2_RTS = PA1
 // MCU_USART2_TX = PA2
 // MCU_USART2_RX = PA3
-/*int main(void) {
-	halInit();
-	chSysInit();
 
+Bluetooth::Bluetooth() {
 	//Init UART2 on GPIOs. Alternate Function AF1 (=USART2) needs to be activated
 	// (Cortex M0 Datasheet, p.33; Ref.Manual p. 140)
 	palSetPadMode(GPIOA, 0, PAL_MODE_ALTERNATE(1)); //CTS
@@ -33,19 +27,27 @@ static SerialConfig sd2cfg = {
 
 	//Start SerialDriver. sdInit() is implicitly called by halInit() above
 	sdStart(&SD2, &sd2cfg);
+}
+
+void Bluetooth::send(uint32_t data) {
 	//Buffer for the characters
-	//uint8_t sendBuf = 4;
-	//char sendBuf[] = {'A','T'};
-	uint32_t x = 0;
-	//char recBuf[2];
-	while(1)
+	sdWrite(&SD2, (uint8_t *) &data, 4);
+}
+
+/**
+ * Reads a command from bluetooth and returns it.
+ */
+char Bluetooth::readCommand(bool timeout) {
+	char cmd = '0';
+	if(!timeout)
 	{
-		sdWrite(&SD2, (uint8_t *) &x, 4);
-		//sdRead(&SD2, (uint8_t *) recBuf, 2);
-		chThdSleepMilliseconds(1000);
-		x+=1;
+		//Block until something is received
+		sdRead(&SD2, (uint8_t *) &cmd, 1);
 	}
-
-	return 0;
-}*/
-
+	else
+	{
+		//Timeout after 10ms
+		sdReadTimeout(&SD2, (uint8_t *) &cmd, 1, 10);
+	}
+	return cmd;
+}
