@@ -86,9 +86,14 @@ uint16_t UltrasonicSensor::getValue() {
 	bool isHighFlank = UltrasonicSensor::isHighFlank[echoPin];
 	uint16_t startTime = UltrasonicSensor::startTime[echoPin];
 	uint16_t endTime = UltrasonicSensor::endTime[echoPin];
+	uint16_t maxValue = 65535;
 
+	//TODO Overflow
 	if(!isHighFlank and startTime != 0 and endTime != 0) {
-		return ST2US(endTime - startTime)/DIVIDER;
+		if(endTime >= startTime)
+			return ST2US(endTime - startTime)/DIVIDER;
+		else
+			return ST2US(65535 - startTime + endTime);
 	}
 	else {
 		return 0;
