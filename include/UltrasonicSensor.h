@@ -14,8 +14,12 @@ public:
 	UltrasonicSensor(short triggerPin, short echoPin);
 	void startMeasurement();
 	uint16_t getValue();
+
 private:
 	static void interruptHandler(EXTDriver *extp, expchannel_t channel);
+
+	const uint16_t DIVIDER = 58;
+
 	static bool isHighFlank[20];
 	static systime_t startTime[20];
 	static systime_t endTime[20];

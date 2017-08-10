@@ -79,13 +79,16 @@ void UltrasonicSensor::startMeasurement() {
 	palClearPad(GPIOB, triggerPin);
 }
 
+/**
+ * Returns the measured value in cm
+ */
 uint16_t UltrasonicSensor::getValue() {
 	bool isHighFlank = UltrasonicSensor::isHighFlank[echoPin];
 	uint16_t startTime = UltrasonicSensor::startTime[echoPin];
 	uint16_t endTime = UltrasonicSensor::endTime[echoPin];
 
 	if(!isHighFlank and startTime != 0 and endTime != 0) {
-		return ST2US(endTime - startTime);
+		return ST2US(endTime - startTime)/DIVIDER;
 	}
 	else {
 		return 0;

@@ -8,11 +8,16 @@
 #include "include/Stepper.h"
 #include "include/Bluetooth.h"
 #include "include/UltrasonicSensor.h"
+#include "include/Utils.h"
 
 using namespace chibios_rt;
-static bool IS_ACTIVE = false;
-char CMD_START = 'S';
 
+static bool IS_ACTIVE = false;
+const char CMD_START = 'S';
+const short FILTER_SIZE = 3;
+
+static uint16_t data1[FILTER_SIZE];
+static uint16_t data2[FILTER_SIZE];
 
 static SerialConfig sd5cfg = {
 	38400 // Baudrate
@@ -29,7 +34,6 @@ void writeSensorDataUART(uint16_t duration, char sensor) {
 
 	int size_duration = sprintf(_duration, "%d", duration);
 	sprintf(_size_duration, "%d", size_duration);
-	//sdWrite(&SD5, (uint8_t *) &sensor, 1);
 	sdWrite(&SD5, (uint8_t *) &sensor, 1);
 	sdWrite(&SD5, (uint8_t *) &_size_duration, 1);
 	sdWrite(&SD5, (uint8_t *) &_duration, size_duration);
@@ -54,7 +58,7 @@ int main(void) {
 	//initUART();
 	//sdStart(&SD5, &sd5cfg);
 
-	Stepper stepper(64);
+	Stepper stepper(32);
 	Bluetooth bt;
 	UltrasonicSensor sensor1(15, 14);
 	UltrasonicSensor sensor2(6, 5);
@@ -64,23 +68,26 @@ int main(void) {
 
 
 	int n = 0;
-	while(1) {
-		sensor1.startMeasurement();
-		sensor2.startMeasurement();
-		chThdSleepMilliseconds(100);
-		uint16_t duration1 = sensor1.getValue();
-		uint16_t duration2 = sensor2.getValue();
-
-		/*if(duration1 > 0)
-			writeSensorDataUART(duration1, '1');
-		if(duration2 > 0)
-			writeSensorDataUART(duration2, '2');
-		chThdSleep(3000);*/
-
+	while(1)
+	{
 		if(IS_ACTIVE)
 		{
-			//writeSensorDataUART(data);
-			bt.send(duration1, duration2);
+			for(int i = 0; i<FILTER_SIZE; ++i)
+			{
+				sensor1.startMeasurement();
+				sensor2.startMeasurement();
+				chThdSleepMilliseconds(50);
+				data1[i] = sensor1.getValue();
+				data2[i] = sensor2.getValue();
+			}
+			Utils::sort(data1, FILTER_SIZE);
+			Utils::sort(data2, FILTER_SIZE);
+
+			uint16_t val1 = data1[FILTER_SIZE/2];
+			uint16_t val2 = data2[FILTER_SIZE/2];
+
+			//writeSensorDataUART(data1);
+			bt.send(val1, val2);
 
 			//Turn the motor
 			stepper.tick();

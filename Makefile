@@ -99,7 +99,8 @@ CPPSRC = $(CHCPPSRC) \
          main.cpp \
          Stepper.cpp \
          UltrasonicSensor.cpp \
-         Bluetooth.cpp
+         Bluetooth.cpp \
+         Utils.cpp
 
 # C sources to be compiled in ARM mode regardless of the global setting.
 # NOTE: Mixing ARM and THUMB mode enables the -mthumb-interwork compiler
