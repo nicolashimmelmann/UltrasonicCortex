@@ -2,11 +2,13 @@
 #include <ch.hpp>
 #include <hal.h>
 #include <pal.h>
-#include <cstring>
 #include <stm32f030xc.h>
 
+#include "include/EXT.h"
+#include "include/PWM.h"
 #include "include/Stepper.h"
 #include "include/Bluetooth.h"
+#include "include/UART.h"
 #include "include/UltrasonicSensor.h"
 #include "include/Utils.h"
 
@@ -18,37 +20,6 @@ const short FILTER_SIZE = 3;
 
 static uint16_t data1[FILTER_SIZE];
 static uint16_t data2[FILTER_SIZE];
-
-static SerialConfig sd5cfg = {
-	38400 // Baudrate
-};
-
-void initUART() {
-	palSetPadMode(GPIOB, 3, PAL_MODE_ALTERNATE(4));
-	palSetPadMode(GPIOB, 4, PAL_MODE_ALTERNATE(4));
-	sdStart(&SD5, &sd5cfg);
-}
-
-void writeSensorDataUART(uint16_t valueOfFirst, uint16_t valueOfSecond) {
-	char strValueFirst[5];
-	char strValueSecond[5];
-	char strSizeFirst[1];
-	char strSizeSecond[1];
-	uint8_t lenOfFirstStr;
-	uint8_t lenOfSecondStr;
-
-	lenOfFirstStr = sprintf(strValueFirst, "%d", valueOfFirst);
-	lenOfSecondStr = sprintf(strValueSecond, "%d", valueOfSecond);
-	sprintf(strSizeFirst, "%d", lenOfFirstStr);
-	sprintf(strSizeSecond, "%d", lenOfSecondStr);
-	sdWrite(&SD5, (uint8_t *) &strSizeFirst, 1);
-	sdWrite(&SD5, (uint8_t *) &strValueFirst, lenOfFirstStr);
-	sdWrite(&SD5, (uint8_t *) &strSizeSecond, 1);
-	sdWrite(&SD5, (uint8_t *) &strValueSecond, lenOfSecondStr);
-
-//	sdWrite(&SD5, (uint8_t *) &valueOfFirst, sizeof(valueOfFirst));
-//	sdWrite(&SD5, (uint8_t *) &valueOfSecond, sizeof(valueOfSecond));
-}
 
 bool waitForCommand(Bluetooth * bt, Stepper * step) {
 	//Do nothing until start is received
@@ -80,20 +51,20 @@ bool waitForCommand(Bluetooth * bt, Stepper * step) {
 	IS_ACTIVE = true;
 }
 
-
 int main(void) {
 	halInit();
 	chSysInit();
 
-	// Set pins and start UART
-	initUART();
-
+	EXT ext;
+	UART uart(3, 4);
 	Stepper stepper(32);
 	Bluetooth bt;
-	UltrasonicSensor sensor1(15, 14);
-	UltrasonicSensor sensor2(6, 5);
+	UltrasonicSensor sensor1(&ext, 15, 14, true); //ARX-ULT10, Sensor with PWM on GPIO 0 and 1
+	sensor1.init();
+	UltrasonicSensor sensor2(&ext, 6, 5, false); //HC-SR04, GPIOs 2 and 3
+	sensor2.init();
 
-
+	//Wait for start command
 	waitForCommand(&bt, &stepper);
 
 	while(1)
@@ -128,7 +99,7 @@ int main(void) {
 		}
 
 		// Send both sensor measurement
-		writeSensorDataUART(val1, val2);
+		uart.write(val1, val2);
 		bt.send(val1, val2);
 
 		//Turn the motor

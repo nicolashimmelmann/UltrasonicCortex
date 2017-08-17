@@ -96,11 +96,14 @@ CSRC = $(STARTUPSRC) \
        $(CHIBIOS)/os/hal/lib/streams/chprintf.c 
 
 CPPSRC = $(CHCPPSRC) \
-         main.cpp \
-         Stepper.cpp \
-         UltrasonicSensor.cpp \
-         Bluetooth.cpp \
-         Utils.cpp
+         src/main.cpp \
+         src/UART.cpp \
+         src/PWM.cpp \
+         src/EXT.cpp \
+         src/Stepper.cpp \
+         src/UltrasonicSensor.cpp \
+         src/Bluetooth.cpp \
+         src/Utils.cpp
 
 # C sources to be compiled in ARM mode regardless of the global setting.
 # NOTE: Mixing ARM and THUMB mode enables the -mthumb-interwork compiler
