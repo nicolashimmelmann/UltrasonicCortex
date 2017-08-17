@@ -62,15 +62,15 @@ void Stepper::makeStep() {
 	}
 
 	//Change direction if necessary
-	if(currentStep >= MAX_STEPS)
+	if(currentStep == MAX_STEPS)
 	{
 		forward = false;
-		currentStep = MAX_STEPS - 1;
+		currentStep = MAX_STEPS - stepsPerTick;
 	}
-	else if(currentStep <= 0)
+	else if(currentStep == 0)
 	{
 		forward = true;
-		currentStep = 0;
+		currentStep = stepsPerTick;
 	}
 }
 
@@ -121,4 +121,9 @@ void Stepper::step(short n) {
 	chThdSleep(60);
 }
 
+void Stepper::reset() {
+	//TODO go back to switch
+	currentStep = 0;
+	forward = true;
+}
 

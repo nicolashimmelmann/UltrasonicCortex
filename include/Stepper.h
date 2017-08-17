@@ -13,6 +13,8 @@ public:
 	void makeStepForward();
 	void makeStepBackward();
 
+	void reset();
+
 private:
 	short STEPS_PER_REVOLUTION = 512;
 	short MAX_STEPS = 10;

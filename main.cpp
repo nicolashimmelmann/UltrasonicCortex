@@ -50,11 +50,32 @@ void writeSensorDataUART(uint16_t valueOfFirst, uint16_t valueOfSecond) {
 //	sdWrite(&SD5, (uint8_t *) &valueOfSecond, sizeof(valueOfSecond));
 }
 
-void waitForStartCommand(Bluetooth * bt) {
+bool waitForCommand(Bluetooth * bt, Stepper * step) {
 	//Do nothing until start is received
 	char cmd = '0';
-	while(cmd != CMD_START) {
+	//Wait for start or reset command
+	while(cmd == '0') {
 		cmd = (*bt).readCommand(false);
+	}
+	switch(cmd) {
+		case 'S':
+			IS_ACTIVE = true;
+			break;
+
+		case 'R':
+			IS_ACTIVE = false;
+			//Clear measurement arrays
+			for(int i = 0; i<FILTER_SIZE; ++i)
+			{
+				data1[i] = 0;
+				data2[i] = 0;
+			}
+			//Reset stepper
+			(*step).reset();
+			return true;
+
+		default:
+			return false;
 	}
 	IS_ACTIVE = true;
 }
@@ -73,47 +94,46 @@ int main(void) {
 	UltrasonicSensor sensor2(6, 5);
 
 
-	waitForStartCommand(&bt);
+	waitForCommand(&bt, &stepper);
 
-
-	int n = 0;
 	while(1)
 	{
-
-		if(IS_ACTIVE)
+		for(int i = 0; i<FILTER_SIZE; ++i)
 		{
-			for(int i = 0; i<FILTER_SIZE; ++i)
-			{
-				sensor1.startMeasurement();
-				sensor2.startMeasurement();
-				chThdSleepMilliseconds(50);
-				data1[i] = sensor1.getValue();
-				data2[i] = sensor2.getValue();
-			}
-			Utils::sort(data1, FILTER_SIZE);
-			Utils::sort(data2, FILTER_SIZE);
+			sensor1.startMeasurement();
+			sensor2.startMeasurement();
+			chThdSleepMilliseconds(50);
+			data1[i] = sensor1.getValue();
+			data2[i] = sensor2.getValue();
+		}
+		Utils::sort(data1, FILTER_SIZE);
+		Utils::sort(data2, FILTER_SIZE);
+		uint16_t val1 = data1[FILTER_SIZE/2];
+		uint16_t val2 = data2[FILTER_SIZE/2];
 
-			uint16_t val1 = data1[FILTER_SIZE/2];
-			uint16_t val2 = data2[FILTER_SIZE/2];
+		//Read stop command from Bluetooth if available
+		//(with timeout to not block)
+		char cmd = bt.readCommand(true);
+		if(cmd == CMD_START) {
+			IS_ACTIVE = false;
+		}
 
-			// Send both sensor measurement
-			writeSensorDataUART(val1, val2);
-			bt.send(val1, val2);
-
-			//Turn the motor
-			stepper.tick();
-			++n;
-
-			//Read stop command from Bluetooth with timeout to not block too long
-			char cmd = bt.readCommand(true);
-			if(cmd == CMD_START) {
-				IS_ACTIVE = false;
+		//Wait for start or reset command
+		if(!IS_ACTIVE) {
+			bool reset = waitForCommand(&bt, &stepper);
+			//Check if reset command was received
+			if(reset) {
+				continue;
 			}
 		}
-		else
-		{
-			waitForStartCommand(&bt);
-		}
+
+		// Send both sensor measurement
+		writeSensorDataUART(val1, val2);
+		bt.send(val1, val2);
+
+		//Turn the motor
+		stepper.tick();
+
 	}
 	return 0;
 }
