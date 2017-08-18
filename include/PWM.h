@@ -8,6 +8,9 @@
 class PWM {
 
 public:
+
+	static const uint32_t PWM_TRIGGER_PAD = 14;
+
 	/**
 	* Initialize the timer and GPIO registers to generate and output
 	* a PWM signal with a duty cycle of 50 %.

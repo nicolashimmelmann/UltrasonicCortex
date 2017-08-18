@@ -1,4 +1,5 @@
 #include "include/EXT.h"
+#include "include/PWM.h"
 
 bool EXT::isHighFlank[] = {false, false, false, false, false,
 		  false, false, false, false, false,
@@ -28,20 +29,25 @@ void EXT::interruptHandler(EXTDriver *extp, expchannel_t channel) {
 
 	chSysLockFromISR();
 
-	if(!isHighFlank[channel])
+	if(channel == 15)
 	{
-		//Save time on high flank
-		startTime[channel] = chVTGetSystemTimeX();
+		endTime[channel] = chVTGetSystemTimeX();
 	}
 	else
 	{
-		//Save time on low flank
-		endTime[channel] = chVTGetSystemTimeX();
+		if(!isHighFlank[channel])
+		{
+			//Save time on high flank
+			startTime[channel] = chVTGetSystemTimeX();
+		}
+		else
+		{
+			//Save time on low flank
+			endTime[channel] = chVTGetSystemTimeX();
+		}
 	}
 
 	isHighFlank[channel] = !isHighFlank[channel];
-
-	palTogglePad(GPIOB, 1);
 
 	chSysUnlockFromISR();
 }

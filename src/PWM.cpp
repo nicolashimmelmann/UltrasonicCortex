@@ -29,7 +29,7 @@ void PWM::init(uint32_t frequency) {
 	pwmcfgNormal.period = pwmcfgNormal.frequency / frequency;
 
 	//Enable the alternate function to output the inverted Timer Channel on the Pin
-	palSetPadMode(GPIOB, 14, PAL_MODE_ALTERNATE(2)); //PB14 = GPIO 1, TIM1_CH2N
+	palSetPadMode(GPIOB, PWM::PWM_TRIGGER_PAD, PAL_MODE_ALTERNATE(2)); //PB14 = GPIO 1, TIM1_CH2N
 
 	//Start PWM
 	pwmStart(&PWMD1, &pwmcfgNormal);

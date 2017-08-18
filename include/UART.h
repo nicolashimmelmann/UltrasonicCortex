@@ -10,6 +10,7 @@ class UART {
 public:
 	UART(uint8_t tx, uint8_t rx);
 	void write(uint16_t value1, uint16_t value2);
+	void writeChar(uint8_t data);
 
 };
 

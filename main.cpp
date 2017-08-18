@@ -21,7 +21,7 @@ const short FILTER_SIZE = 3;
 static uint16_t data1[FILTER_SIZE];
 static uint16_t data2[FILTER_SIZE];
 
-bool waitForCommand(Bluetooth * bt, Stepper * step) {
+bool waitForCommand(Bluetooth * bt, UART * uart, Stepper * step) {
 	//Do nothing until start is received
 	char cmd = '0';
 	//Wait for start or reset command
@@ -41,6 +41,8 @@ bool waitForCommand(Bluetooth * bt, Stepper * step) {
 				data1[i] = 0;
 				data2[i] = 0;
 			}
+			//Send reset command to raspberry pi animation
+			(*uart).writeChar('R');
 			//Reset stepper
 			(*step).reset();
 			return true;
@@ -59,13 +61,14 @@ int main(void) {
 	UART uart(3, 4);
 	Stepper stepper(32);
 	Bluetooth bt;
-	UltrasonicSensor sensor1(&ext, 15, 14, true); //ARX-ULT10, Sensor with PWM on GPIO 0 and 1
+	//UltrasonicSensor sensor1(&ext, 15, 14, true); //ARX-ULT10, Sensor with PWM on GPIO 0 and 1
+	UltrasonicSensor sensor1(&ext, 15, 14, false);
 	sensor1.init();
 	UltrasonicSensor sensor2(&ext, 6, 5, false); //HC-SR04, GPIOs 2 and 3
 	sensor2.init();
 
 	//Wait for start command
-	waitForCommand(&bt, &stepper);
+	waitForCommand(&bt, &uart, &stepper);
 
 	while(1)
 	{
@@ -79,6 +82,8 @@ int main(void) {
 		}
 		Utils::sort(data1, FILTER_SIZE);
 		Utils::sort(data2, FILTER_SIZE);
+		//uint16_t val1 = data1[FILTER_SIZE/2];
+		//uint16_t val2 = data2[FILTER_SIZE/2];
 		uint16_t val1 = data1[FILTER_SIZE/2];
 		uint16_t val2 = data2[FILTER_SIZE/2];
 
@@ -91,7 +96,7 @@ int main(void) {
 
 		//Wait for start or reset command
 		if(!IS_ACTIVE) {
-			bool reset = waitForCommand(&bt, &stepper);
+			bool reset = waitForCommand(&bt, &uart, &stepper);
 			//Check if reset command was received
 			if(reset) {
 				continue;

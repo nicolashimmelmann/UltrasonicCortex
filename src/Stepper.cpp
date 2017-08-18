@@ -123,7 +123,10 @@ void Stepper::step(short n) {
 
 void Stepper::reset() {
 	//TODO go back to switch
-	currentStep = 0;
+	while(currentStep > 0) {
+		makeStepBackward();
+		currentStep--;
+	}
 	forward = true;
 }
 

@@ -46,7 +46,7 @@ void UltrasonicSensor::startMeasurement() {
 		pwm.start();
 		chThdSleepMilliseconds(20);
 		pwm.stop();
-		//ext->startTime[echoPin] =
+		ext->startTime[echoPin] = chVTGetSystemTime();
 	}
 }
 

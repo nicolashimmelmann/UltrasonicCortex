@@ -31,3 +31,7 @@ void UART::write(uint16_t value1, uint16_t value2) {
 //	sdWrite(&SD5, (uint8_t *) &valueOfFirst, sizeof(valueOfFirst));
 //	sdWrite(&SD5, (uint8_t *) &valueOfSecond, sizeof(valueOfSecond));
 }
+
+void UART::writeChar(uint8_t data) {
+	sdWrite(&SD5, (uint8_t *) &data, 1);
+}
