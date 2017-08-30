@@ -1,10 +1,3 @@
-/*
- * Utils.cpp
- *
- *  Created on: 10.08.2017
- *      Author: nicolas
- */
-
 #include "include/Utils.h"
 
 void Utils::sort(uint16_t * arr, uint16_t size) {

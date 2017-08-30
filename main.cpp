@@ -5,7 +5,6 @@
 #include <stm32f030xc.h>
 
 #include "include/EXT.h"
-#include "include/PWM.h"
 #include "include/Stepper.h"
 #include "include/Bluetooth.h"
 #include "include/UART.h"
@@ -61,10 +60,9 @@ int main(void) {
 	UART uart(3, 4);
 	Stepper stepper(32);
 	Bluetooth bt;
-	//UltrasonicSensor sensor1(&ext, 15, 14, true); //ARX-ULT10, Sensor with PWM on GPIO 0 and 1
-	UltrasonicSensor sensor1(&ext, 15, 14, false);
+	UltrasonicSensor sensor1(&ext, 15, 14); //HC-SR04, GPIOs 0 and 1
 	sensor1.init();
-	UltrasonicSensor sensor2(&ext, 6, 5, false); //HC-SR04, GPIOs 2 and 3
+	UltrasonicSensor sensor2(&ext, 6, 5); //HC-SR04, GPIOs 2 and 3
 	sensor2.init();
 
 	//Wait for start command
@@ -82,8 +80,6 @@ int main(void) {
 		}
 		Utils::sort(data1, FILTER_SIZE);
 		Utils::sort(data2, FILTER_SIZE);
-		//uint16_t val1 = data1[FILTER_SIZE/2];
-		//uint16_t val2 = data2[FILTER_SIZE/2];
 		uint16_t val1 = data1[FILTER_SIZE/2];
 		uint16_t val2 = data2[FILTER_SIZE/2];
 

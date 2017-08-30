@@ -1,10 +1,3 @@
-/*
- * EXT.h
- *
- *  Created on: 17.08.2017
- *      Author: nicolas
- */
-
 #ifndef INCLUDE_EXT_H_
 #define INCLUDE_EXT_H_
 

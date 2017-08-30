@@ -98,7 +98,6 @@ CSRC = $(STARTUPSRC) \
 CPPSRC = $(CHCPPSRC) \
          src/main.cpp \
          src/UART.cpp \
-         src/PWM.cpp \
          src/EXT.cpp \
          src/Stepper.cpp \
          src/UltrasonicSensor.cpp \

@@ -1,10 +1,3 @@
-/*
- * Utils.h
- *
- *  Created on: 10.08.2017
- *      Author: nicolas
- */
-
 #ifndef INCLUDE_UTILS_H_
 #define INCLUDE_UTILS_H_
 
